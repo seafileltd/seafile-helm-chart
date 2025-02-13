@@ -29,11 +29,11 @@ seafile:
       value: "<Seafile admin's email>"
 
     # for database
-    - name: SEAFILE_MYSQL_DB_HOST
+    - name: DB_HOST
       value: "<your MySQL host>"
-    - name: SEAFILE_MYSQL_DB_PORT
+    - name: DB_PORT
       value: "3306"
-    - name: SEAFILE_MYSQL_DB_USER
+    - name: DB_USER
       value: "seafile"
     - name: SEAFILE_MYSQL_DB_CCNET_DB_NAME
       value: "ccnet_db"
