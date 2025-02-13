@@ -56,9 +56,9 @@ This is a public repository for storing charts related to quick deployment of Se
 
 >[!WARNING]
 >For `pro` edition, you should modify the hostname of ***Memcached*** and ***Elasticsearch*** after first-time deployment according to [here](https://manual.seafile.com/latest/setup/k8s_single_node/#start-seafile-server), then restart the instances by 
-    ```sh
-    kubectl delete pod seafile -n seafile
-    ```
+>```sh
+>kubectl delete pod seafile -n seafile
+>```
 
 ## Uninstall Seafile helm char
 
