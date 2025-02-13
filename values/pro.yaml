@@ -66,21 +66,14 @@ seafile:
 
   # if you are using another secret name / key for seafile or mysql, please make correct the following fields
   secretsMap:
+    - name: DB_ROOT_PASSWD # Env's name
+      secret: seafile-secret # secret's name, `seafile-secret` if not specify
+      key: INIT_SEAFILE_MYSQL_ROOT_PASSWORD # secret's key, `Env's name` if not specify
     - name: JWT_PRIVATE_KEY
-      secret: seafile-secret # to your secret name
-      key: JWT_PRIVATE_KEY # to your secret key
     - name: DB_PASSWORD
-      secret: seafile-secret
       key: SEAFILE_MYSQL_DB_PASSWORD
     - name: INIT_SEAFILE_ADMIN_PASSWORD
-      secret: seafile-secret
-      key: INIT_SEAFILE_ADMIN_PASSWORD
-    - name: DB_ROOT_PASSWD
-      secret: seafile-secret
-      key: INIT_SEAFILE_MYSQL_ROOT_PASSWORD
     - name: INIT_S3_SECRET_KEY
-      secret: seafile-secret
-      key: INIT_S3_SECRET_KEY
   
   # extra configurations
   extraResources: {}
