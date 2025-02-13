@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seafile-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seafile-backend
+  template:
+    metadata:
+      labels:
+        app: seafile-backend
+    spec:
+      initContainers:  
+        - name: set-ownership  
+          image: busybox  
+          command: ['sh', '-c', 'chown -R root:root /shared']  
+          volumeMounts:  
+          - name: seafile-data  
+            mountPath: /shared
+      containers:
+        - name: seafile-backend
+          image: {{ include "seafile.image" . }}
+          env:
+            - name: CLUSTER_SERVER
+              value: "true"
+            - name: CLUSTER_MODE
+              value: "backend"
+
+            # common env
+            {{- if .Values.seafile.env }}
+            {{- range .Values.seafile.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
+
+            # common secret
+            {{- if .Values.seafile.secretsMap }}
+            {{- range .Values.seafile.secretsMap }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  {{- if .secret }}
+                  name: {{ .secret }}
+                  {{- else }}
+                  name: seafile-secret
+                  {{- end }}
+              value: {{ .key }}
+            {{- end }}
+            {{- end }}
+
+            # extra envs
+            {{- if .Values.seafile.extraEnv.backend }}
+            {{- toYaml .Values.seafile.extraEnv.backend | nindent 12 }}
+            {{- end }}
+
+          volumeMounts:
+            - name: seafile-data
+              mountPath: /shared
+            {{- if .Values.seafile.extraVolumes.backend }}
+            {{- range .Values.seafile.extraVolumes.backend }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+              {{- if .readOnly }}
+              readOnly: {{ .readOnly }}
+              {{- end }}
+            {{- end }}
+            {{- end }}
+          resources: {{- toYaml .Values.seafile.extraResources.backend | nindent 12 }}
+      volumes:
+        - name: seafile-data
+          persistentVolumeClaim:
+            claimName: seafile-data
+        {{- if .Values.seafile.extraVolumes.backend }}
+        {{- range .Values.seafile.extraVolumes.backend }}
+        - name: {{ .name }}
+          {{- toYaml .volumeInfo | nindent 10 }}
+        {{- end }}
+        {{- end }}
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: regcred

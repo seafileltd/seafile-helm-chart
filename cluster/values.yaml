@@ -1,0 +1,15 @@
+seafile:
+  configs: {} # seafile container configurations, object
+  env: [] # environment variables for seafile service, list (name, value)
+  secretsMap: [] # seafile services secrets env, list (name, value)
+  
+  # extra infomations object(frontend, backend)
+  extraResources: 
+    frontend: {}
+    backend: {}
+  extraEnv:
+    frontend: []
+    backend: []
+  extraVolumes: 
+    frontend: []
+    backend: []
