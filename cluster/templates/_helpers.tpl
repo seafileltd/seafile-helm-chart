@@ -114,7 +114,7 @@
         {{- printf "0" -}}
     {{- else }}
         {{- if .Values.seafile.configs.seafileFrontendReplicas }}
-            {{- printf "%d" .Values.seafile.configs.seafileFrontendReplicas }}
+            {{- printf "%s" .Values.seafile.configs.seafileFrontendReplicas }}
         {{- else }}
             {{- printf "1" }}
         {{- end }}

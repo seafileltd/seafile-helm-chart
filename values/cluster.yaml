@@ -1,7 +1,7 @@
 seafile:
   # The following are the configurations of seafile container
   configs:
-    seafileFrontendReplicas: 1
+    seafileFrontendReplicas: "1"
     image: seafileltd/seafile-pro-mc:12.0-latest 
     seafileDataVolume: 
       hostPath: /opt/seafile/shared
