@@ -28,7 +28,7 @@
         {{- if .Values.seafile.configs.seafileDataVolume.hostPath }}
             {{- printf "%s" .Values.seafile.configs.seafileDataVolume.hostPath }}
         {{- else }}
-            {{- printf "/opt/seafile/shared" }}
+            {{- printf "/opt/seafile-data" }}
         {{- end }}
     {{- else }}
         {{- printf "10Gi" }}
