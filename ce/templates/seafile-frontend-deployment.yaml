@@ -42,7 +42,6 @@ spec:
                   {{- else }}
                   name: seafile-secret
                   {{- end }}
-              value: {{ .key }}
             {{- end }}
             {{- end }}
 
