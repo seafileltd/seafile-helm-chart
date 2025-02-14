@@ -4,6 +4,10 @@ This is a public repository for storing charts related to quick deployment of Se
 
 ## Deployment
 
+### System requirements
+
+Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other services on the node, this requirement may increase. In particular, for nodes running ***ElasticSearch***, at least 4 cores and 4GB memory should be prepared.
+
 ### Preparation
 
 - Create namespace
@@ -36,15 +40,19 @@ This is a public repository for storing charts related to quick deployment of Se
 
 ## Install Seafile helm chart
 
-- Copy and modify the `values.yaml` according to your configurations
+- Download and modify the `values.yaml` according to your configurations
 
     ```sh
-    cp values/<type of deployment> .yaml ./my-values.yaml # cluster.yaml can change to other type by your deployment situation
+    wget -O my-values.yaml https://seafileltd.github.io/seafile-helm-chart/values/<type of deployment>.yaml
 
     nano my-values.yaml
     ```
 
-- To install the chart use the following:
+>[!TIP]
+>- The `<type of deployment>` should be one of `pro`, `ce` and `cluster`.
+>- You can follow the Seafile official manual to refer the details about [enviroment variables description](https://manual.seafile.com/latest/config/env/)
+
+- Then install the chart use the following:
 
     ```sh
     helm repo add seafile https://github.com/seafileltd/seafile-helm-chart
