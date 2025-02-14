@@ -40,7 +40,7 @@ Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other se
 
 ## Install Seafile helm chart
 
-- Download and modify the `values.yaml` according to your configurations
+- Download and modify the `my-values.yaml` according to your configurations
 
     ```sh
     wget -O my-values.yaml https://seafileltd.github.io/seafile-helm-chart/values/<type of deployment>.yaml
