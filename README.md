@@ -63,10 +63,15 @@ Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other se
 >The default service type of Seafile is `LoadBalancer`, and `Nginx-ingress` is not integrated because it is [outdated](https://kubernetes.io/docs/concepts/services-networking/ingress/) in the new *Kubernetes* version, and new features are being added to the [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/). So you should specify *K8S load balancer* for *Seafile* or specify at least one external ip, that can be accessed from external networks.
 
 >[!WARNING]
->For `pro` edition, you should modify the hostname of ***Memcached*** and ***Elasticsearch*** after first-time deployment according to [here](https://manual.seafile.com/latest/setup/k8s_single_node/#start-seafile-server), then restart the instances by 
->```sh
->kubectl delete pods -n seafile $(kubectl get pods -n seafile -o jsonpath='{.items[*].metadata.name}' | grep seafile)
->```
+>- For `pro` edition, you should modify the hostname of ***Memcached*** and ***Elasticsearch*** after first-time deployment according to [here](https://manual.seafile.com/latest/setup/k8s_single_node/#start-seafile-server), then restart the instances by 
+>    ```sh
+>    kubectl delete pods -n seafile $(kubectl get pods -n seafile -o jsonpath='{.items[*].metadata.name}' | grep seafile)
+>    ```
+>
+>- For `cluster`, you have to turn off `CLUSTER_INIT_MODE` in your `my-values.yaml` after first startup, then upgrade the chart
+>    ```sh
+>    helm upgrade --install seafile seafile/<type of deployment>  --namespace seafile --create-namespace --values my-values.yaml
+>    ```
 
 ## Uninstall Seafile helm char
 
