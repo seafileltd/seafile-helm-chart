@@ -65,7 +65,7 @@ Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other se
 >[!WARNING]
 >For `pro` edition, you should modify the hostname of ***Memcached*** and ***Elasticsearch*** after first-time deployment according to [here](https://manual.seafile.com/latest/setup/k8s_single_node/#start-seafile-server), then restart the instances by 
 >```sh
->kubectl delete pod seafile -n seafile
+>kubectl delete pods -n seafile $(kubectl get pods -n seafile -o jsonpath='{.items[*].metadata.name}' | grep seafile)
 >```
 
 ## Uninstall Seafile helm char
