@@ -70,4 +70,6 @@ Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other se
 
 ## Uninstall Seafile helm char
 
+```sh
 helm delete seafile --namespace seafile
+```
