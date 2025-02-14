@@ -70,7 +70,7 @@ Minimum 2 cores (> 2G Hz) and 2G memory for a single node. If there are other se
 >
 >- For `cluster`, you have to turn off `CLUSTER_INIT_MODE` in your `my-values.yaml` after first startup, then upgrade the chart
 >    ```sh
->    helm upgrade --install seafile seafile/<type of deployment>  --namespace seafile --create-namespace --values my-values.yaml
+>    helm upgrade --install seafile seafile/cluster  --namespace seafile --create-namespace --values my-values.yaml
 >    ```
 
 ## Uninstall Seafile helm char
